@@ -6,7 +6,7 @@ class MainPage extends Component {
         return(
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => Actions.JourneyPage()}>
-                    <Text>Main </Text>
+                    <Text>Main</Text>
                 </TouchableOpacity>
             </View>
            
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#F5FCFF',
+      backgroundColor: '#404855',
     },
     welcome: {
       fontSize: 20,

@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Router from './Router';
 
-class App extends Component<Props> {
+class App extends Component {
   render() {
     return (
-      <Router />
+      <View style={{flex:1}}>
+        <Router />
+      </View>
     );
   }
 }
@@ -28,3 +30,4 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+export default App;

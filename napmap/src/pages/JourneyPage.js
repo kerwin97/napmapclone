@@ -5,7 +5,7 @@ class JourneyPage extends Component {
     render(){
         return(
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => Actions.Pop()}>
+                <TouchableOpacity onPress={() => Actions.pop()}>
                     <Text>journey page </Text>
                 </TouchableOpacity>
             </View>
