@@ -9,7 +9,8 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.9",
-    "react-native-background-geolocation": "^3.0.7"
+    "react-native-background-geolocation": "^3.0.7",
+    "react-native-router-flux": "^4.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
