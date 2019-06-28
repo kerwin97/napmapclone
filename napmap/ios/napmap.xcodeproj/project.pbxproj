@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -41,13 +42,13 @@
 		6E2B68879B7543A4B6D685EA /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EEB20F7A5B45B0A9651BFF /* TSLocationManager.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9B8427D164FE4BE7A21363FD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D09863D2E84294AD2554D9 /* libsqlite3.tbd */; };
+		A3DD1F1F524B400FB6094359 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60798FCE361D4F6F957EEF20 /* libAirMaps.a */; };
 		A64A679320FA4FF7933BBDC9 /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A54BD29C7BC4C8C84CE9F38 /* TSBackgroundFetch.framework */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		D2D33DA5CD134DAAB34DEB7E /* libRNBackgroundGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5321BBA6A7146C29FF56A5D /* libRNBackgroundGeolocation.a */; };
 		DBFD434A518C4AF8990E5E13 /* libRNBackgroundFetch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB5CD31152A40419F27BD00 /* libRNBackgroundFetch.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
-		A3DD1F1F524B400FB6094359 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60798FCE361D4F6F957EEF20 /* libAirMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
+		};
+		2DC3CD7422C5C2BD0016AC03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F29D3E5BDA54C14A7CA1AA2 /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
 		};
 		2DDF85A122C4769500E12259 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -375,11 +383,13 @@
 		3E98B6B2204B4D68B8558044 /* RNBackgroundGeolocation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundGeolocation.xcodeproj; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		55B31F3A440148E18895425E /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCocoaLumberjack.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		60798FCE361D4F6F957EEF20 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		6B52EFEA6BC64D268517CCFF /* RNBackgroundFetch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundFetch.xcodeproj; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch.xcodeproj"; sourceTree = "<group>"; };
 		76D09863D2E84294AD2554D9 /* libsqlite3.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8A54BD29C7BC4C8C84CE9F38 /* TSBackgroundFetch.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TSBackgroundFetch.framework; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/TSBackgroundFetch.framework"; sourceTree = SDKROOT; };
+		9F29D3E5BDA54C14A7CA1AA2 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AEC478F19B7B4F38BC726848 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D701FE3C765E441A816AABF2 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
@@ -387,8 +397,6 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F5321BBA6A7146C29FF56A5D /* libRNBackgroundGeolocation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundGeolocation.a; sourceTree = "<group>"; };
-		9F29D3E5BDA54C14A7CA1AA2 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		60798FCE361D4F6F957EEF20 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -586,12 +594,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2DC3CD7122C5C2BD0016AC03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2DC3CD7522C5C2BD0016AC03 /* libAirMaps.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2DDF857B22C4769400E12259 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				55B31F3A440148E18895425E /* libCocoaLumberjack.a */,
 				F5321BBA6A7146C29FF56A5D /* libRNBackgroundGeolocation.a */,
 				2AB5CD31152A40419F27BD00 /* libRNBackgroundFetch.a */,
+				60798FCE361D4F6F957EEF20 /* libAirMaps.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -825,6 +842,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 2DC3CD7122C5C2BD0016AC03 /* Products */;
+					ProjectRef = 9F29D3E5BDA54C14A7CA1AA2 /* AirMaps.xcodeproj */;
+				},
+				{
 					ProductGroup = 2DDF85A922C4769500E12259 /* Products */;
 					ProjectRef = D8D22A2345E0458B958BBC5A /* Lumberjack.xcodeproj */;
 				},
@@ -971,6 +992,13 @@
 			fileType = archive.ar;
 			path = "libfishhook-tvOS.a";
 			remoteRef = 2D16E6851FA4F8DC00B85C8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2DC3CD7522C5C2BD0016AC03 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = 2DC3CD7422C5C2BD0016AC03 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2DDF85A222C4769500E12259 /* libjsi.a */ = {
