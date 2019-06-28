@@ -1,0 +1,6 @@
+framework module Pods_napmap_tvOS {
+  umbrella header "Pods-napmap-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
