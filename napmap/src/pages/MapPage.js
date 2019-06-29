@@ -1,32 +1,25 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
- 
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+
 //kerwin: dump your map here -elsa 
 
 class MapPage extends Component {
-    renderXButton(){
+    render(){
       return (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity 
-          onPress={() => Actions.pop()}
-          activeOpacity={0.1}>
-              <Image 
-              style={{width: 25, height: 25}} 
-              source={require('../components/common/images/x-button.png')} />
-          </TouchableOpacity>
+        <View style={{ flex: 1 }}>
+          <MapView 
+            provider={PROVIDER_GOOGLE}
+            style={{ flex: 1 }}
+            showsUserLocation
+            followsUserLocation
+          />
         </View>
       );
     }
-      render() {
-          return (
-              <View style={styles.container}>
-                {this.renderXButton()}
-              </View>
-             
-          );
-      }
-  }
+}
+
 const backgroundColor = '#404855';
 const { width, height } = Dimensions.get('window');
 const circleSize = 60;

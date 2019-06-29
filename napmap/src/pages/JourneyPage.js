@@ -60,7 +60,9 @@ class JourneyPage extends Component {
       </View>
     );
   }
-
+  renderTimeLeft(){
+    
+  }
   render() {
       return (
           <View style={styles.container}>

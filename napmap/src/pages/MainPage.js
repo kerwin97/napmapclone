@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, ScrollView, Animated, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card } from '../components/common/Card';
 //using Test array first to fix the ui, will be removed for firebase data later on 
@@ -19,11 +19,11 @@ const testArray = [
     title: 'work',
     address: 'NUS Computing, 15 Computing Drive, Singapore'
   },
-  {
-    key: 3,
-    title: 'work',
-    address: 'NUS Computing, 15 Computing Drive, Singapore'
-  },
+  // {
+  //   key: 3,
+  //   title: 'work',
+  //   address: 'NUS Computing, 15 Computing Drive, Singapore'
+  // },
   // {
   //   key: 4,
   //   title: 'work',
@@ -37,6 +37,13 @@ const testArray = [
 ];
 
 class MainPage extends Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        expandedSettings: false
+      };
+    }
+    
     Capitalize(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     }
@@ -82,7 +89,7 @@ class MainPage extends Component {
           {
             testArray.map((item) => 
             <TouchableOpacity
-            onPress={()=>Actions.JourneyPage()}>
+            onPress={() => Actions.JourneyPage()}>
               <Card>
                 <View style={{ marginHorizontal: 25, marginVertical: 15, }}>
                   <Text style={styles.cardTitle}>{this.Capitalize(item.title)}</Text>
@@ -96,6 +103,48 @@ class MainPage extends Component {
           }
         </View>
       );
+    }
+    renderSettingsPanel() {
+      return this.state.expandedSettings ?
+      (
+      <View style={{ 
+        width: width, 
+        height: height * 4 /5 , 
+        backgroundColor: 'white', 
+        bottom: 0, 
+        // justifyContent: 'center', 
+        // alignItems: 'center',
+        backgroundColor: '#97A3BA',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+      }}>
+          <View style={{width: 50, height: 5, borderRadius: 2.5, backgroundColor: 'white', marginTop: 15, alignSelf: 'center'}}/>
+          <Text style={[styles.headerText, {fontSize: 30, marginLeft: 20}]}>Settings</Text>
+          <Text style={[styles.cardSubtitle, { marginLeft: 20, color: 'white', marginTop: 10}]}>Coming Soon!</Text>
+      </View> 
+      )
+      :
+       (
+        //elsa: abstract later -elsa
+        <View style={{ 
+          width: width, 
+          height: 50, 
+          backgroundColor: 'white', 
+          bottom: 0, 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          backgroundColor: '#97A3BA',
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}>
+            <View style={{width: 50, height: 5, borderRadius: 2.5, backgroundColor: 'white'}}/>
+        </View> 
+      );
+    }
+    toggleExpanded(){
+      this.setState({
+        expandedSettings: !this.state.expandedSettings
+      });
     }
     render() {
         return (
@@ -114,6 +163,9 @@ class MainPage extends Component {
                 {this.renderAddRoute()}
               </View>
             </ScrollView>
+            <TouchableWithoutFeedback onPress={()=> this.toggleExpanded()}>
+              {this.renderSettingsPanel()}
+            </TouchableWithoutFeedback>
            
           </View>
          
@@ -128,7 +180,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: backgroundColor,
-      paddingBottom: 30,
+      // paddingBottom: 30,
     },
     welcome: {
       fontSize: 20,
