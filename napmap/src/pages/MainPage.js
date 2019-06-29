@@ -24,16 +24,16 @@ const testArray = [
     title: 'work',
     address: 'NUS Computing, 15 Computing Drive, Singapore'
   },
-  {
-    key: 4,
-    title: 'work',
-    address: 'NUS Computing, 15 Computing Drive, Singapore'
-  },
-  {
-    key: 5,
-    title: 'work',
-    address: 'NUS Computing, 15 Computing Drive, Singapore'
-  },
+  // {
+  //   key: 4,
+  //   title: 'work',
+  //   address: 'NUS Computing, 15 Computing Drive, Singapore'
+  // },
+  // {
+  //   key: 5,
+  //   title: 'work',
+  //   address: 'NUS Computing, 15 Computing Drive, Singapore'
+  // },
 ];
 
 class MainPage extends Component {
@@ -63,14 +63,28 @@ class MainPage extends Component {
         </View>
       );
     }
+    renderAddRoute(){
+      return(
+        <View style={[styles.cardContainer,{alignItems: 'center'}]}>
+          <TouchableOpacity onPress={()=>Actions.AddRoutePage()}>
+            <View style={styles.circle}>
+              <Image 
+              style={{width: 25, height: 25, transform: [{rotate: '45deg'}] }} 
+              source={require('../components/common/images/x-button.png')} />
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
+    }
     renderCards(){
       return (
         <View style={styles.cardContainer}>
           {
-            testArray.map((item ) => 
-            <TouchableOpacity>
+            testArray.map((item) => 
+            <TouchableOpacity
+            onPress={()=>Actions.JourneyPage()}>
               <Card>
-                <View style={{ marginLeft: 25, marginVertical: 15, }}>
+                <View style={{ marginHorizontal: 25, marginVertical: 15, }}>
                   <Text style={styles.cardTitle}>{this.Capitalize(item.title)}</Text>
                   <View style={{marginTop: 10}}>
                   <Text style={styles.cardSubtitle}>{item.address}</Text>
@@ -86,7 +100,7 @@ class MainPage extends Component {
     render() {
         return (
           <View style={styles.container}>
-            <ScrollView>
+            <ScrollView >
             
               <View style={{flexDirection:'row'}}>
                 {this.renderHeader()}
@@ -96,7 +110,11 @@ class MainPage extends Component {
               <View style={{flex:1}}>
                 {this.renderCards()}
               </View>
+              <View>
+                {this.renderAddRoute()}
+              </View>
             </ScrollView>
+           
           </View>
          
         );
@@ -105,10 +123,12 @@ class MainPage extends Component {
 export default MainPage;
 const backgroundColor = '#404855';
 const { width, height } = Dimensions.get('window');
+const circleSize = 60;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: backgroundColor,
+      paddingBottom: 30,
     },
     welcome: {
       fontSize: 20,
@@ -143,9 +163,7 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
       // backgroundColor: 'red',
-      height: (height * 3 / 4) - 25,
       width: width,
-      bottom: 0,
     },
     cardTitle: { 
       fontFamily: 'arial',
@@ -158,5 +176,13 @@ const styles = StyleSheet.create({
       fontSize: 14,
       fontWeight: '100',
       color: '#97A3BA',
+    },
+    circle: {
+      backgroundColor: 'white',
+      height: circleSize, 
+      width: circleSize, 
+      borderRadius: circleSize/2, 
+      alignItems: 'center',
+      justifyContent: 'center',
     }
   });
