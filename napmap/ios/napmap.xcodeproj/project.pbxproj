@@ -44,11 +44,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8F0D58FED4F33F5B82168265 /* Pods_napmap_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7163A0CC44836FB32C0818 /* Pods_napmap_tvOS.framework */; };
 		9B8427D164FE4BE7A21363FD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D09863D2E84294AD2554D9 /* libsqlite3.tbd */; };
-<<<<<<< HEAD
-		A3DD1F1F524B400FB6094359 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60798FCE361D4F6F957EEF20 /* libAirMaps.a */; };
-=======
 		A02EB8E85AD7AF7CE09C5616 /* libPods-napmap-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 494EB552707790EE871CF5EB /* libPods-napmap-tvOSTests.a */; };
->>>>>>> installed maps and firebase with cocoapods
 		A64A679320FA4FF7933BBDC9 /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A54BD29C7BC4C8C84CE9F38 /* TSBackgroundFetch.framework */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B2298312D4721865C83A8A42 /* libPods-napmapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7C3CE9CCBD6EBD8F19C1E6 /* libPods-napmapTests.a */; };
@@ -417,11 +413,9 @@
 		7A2C2FD0B0B64FCFACF7B7D3 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8A54BD29C7BC4C8C84CE9F38 /* TSBackgroundFetch.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TSBackgroundFetch.framework; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/TSBackgroundFetch.framework"; sourceTree = SDKROOT; };
-<<<<<<< HEAD
-		9F29D3E5BDA54C14A7CA1AA2 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
-=======
+
 		8DC62DF0B2ED8189F4A60DA4 /* Pods-napmap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-napmap.debug.xcconfig"; path = "Target Support Files/Pods-napmap/Pods-napmap.debug.xcconfig"; sourceTree = "<group>"; };
->>>>>>> installed maps and firebase with cocoapods
+
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AEC478F19B7B4F38BC726848 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B7D826FEEDA8C411C3556CF2 /* Pods-napmap-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-napmap-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-napmap-tvOSTests/Pods-napmap-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -436,10 +430,9 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F5321BBA6A7146C29FF56A5D /* libRNBackgroundGeolocation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundGeolocation.a; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
+
 		FA6EE437299785EB8712CFAA /* Pods-napmapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-napmapTests.release.xcconfig"; path = "Target Support Files/Pods-napmapTests/Pods-napmapTests.release.xcconfig"; sourceTree = "<group>"; };
->>>>>>> installed maps and firebase with cocoapods
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -660,10 +653,9 @@
 				F5321BBA6A7146C29FF56A5D /* libRNBackgroundGeolocation.a */,
 				2AB5CD31152A40419F27BD00 /* libRNBackgroundFetch.a */,
 				60798FCE361D4F6F957EEF20 /* libAirMaps.a */,
-<<<<<<< HEAD
-=======
+
 				B7D86DFC716D45DF8F6B1713 /* libRNFirebase.a */,
->>>>>>> installed maps and firebase with cocoapods
+
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -939,13 +931,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-<<<<<<< HEAD
-					ProductGroup = 2DC3CD7122C5C2BD0016AC03 /* Products */;
-					ProjectRef = 9F29D3E5BDA54C14A7CA1AA2 /* AirMaps.xcodeproj */;
-=======
+
 					ProductGroup = D1C5E83B22C616090013E9FD /* Products */;
 					ProjectRef = D1C5E83A22C616090013E9FD /* AirMaps.xcodeproj */;
->>>>>>> installed maps and firebase with cocoapods
+
 				},
 				{
 					ProductGroup = 2DDF85A922C4769500E12259 /* Products */;
