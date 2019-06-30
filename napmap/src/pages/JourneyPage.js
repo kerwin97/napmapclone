@@ -60,8 +60,17 @@ class JourneyPage extends Component {
       </View>
     );
   }
-  renderTimeLeft(){
-    
+  renderTimeLeft(time){
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+        <Text style={{ fontSize: 80, fontFamily: 'arial', fontWeight: '900', color: 'white'}}>
+          {time}
+        </Text>
+        <Text style={{fontFamily: 'arial', fontSize: 12, color: 'white'}}>
+          more minutes
+        </Text>
+      </View>
+    );
   }
   render() {
       return (
@@ -71,17 +80,20 @@ class JourneyPage extends Component {
               {this.renderXButton()}
               <Button onPress={() => Actions.MapPage()}><Text>view in map</Text></Button>
             </View>
-            <Image 
-            style={{
-              shadowColor: '#000', 
-              shadowOffset: { width: 0, height: 0 }, 
-              shadowOpacity: 0.5, 
-              width: 150, 
-              height: 150,
-              marginLeft: 30,
-              marginTop: 15,
-            }}
-            source={require('../components/common/images/sloth.png')}/>
+            <View style={{ flexDirection: 'row' }}>
+              <Image 
+              style={{
+                shadowColor: '#000', 
+                shadowOffset: { width: 0, height: 0 }, 
+                shadowOpacity: 0.5, 
+                width: 150, 
+                height: 150,
+                marginLeft: 30,
+                marginTop: 15,
+              }}
+              source={require('../components/common/images/sloth.png')}/>
+              {this.renderTimeLeft(20)}
+            </View>
             <View style={{ marginTop: 20 }}>
               {this.renderCards()}
             </View>

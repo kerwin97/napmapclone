@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, ScrollView, Animated, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card } from '../components/common/Card';
 //using Test array first to fix the ui, will be removed for firebase data later on 
@@ -146,6 +146,7 @@ class MainPage extends Component {
         expandedSettings: !this.state.expandedSettings
       });
     }
+    
     render() {
         return (
           <View style={styles.container}>
@@ -153,7 +154,7 @@ class MainPage extends Component {
             
               <View style={{flexDirection:'row'}}>
                 {this.renderHeader()}
-                {this.renderXButton()}
+                {/* {this.renderXButton()} */}
               </View>
                  
               <View style={{flex:1}}>
@@ -166,7 +167,6 @@ class MainPage extends Component {
             <TouchableWithoutFeedback onPress={()=> this.toggleExpanded()}>
               {this.renderSettingsPanel()}
             </TouchableWithoutFeedback>
-           
           </View>
          
         );

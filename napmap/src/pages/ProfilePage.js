@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+
+//unreachable for now... fix later at milestone 3 
 class ProfilePage extends Component {
     render(){
-        return(
+        return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => Actions.pop()}>
                     <Text>profile page </Text>
