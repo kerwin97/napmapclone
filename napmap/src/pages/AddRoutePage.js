@@ -2,7 +2,33 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '../components/common/Button';
+import _ from 'lodash';
+
 class AddRoutePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      startloc: '',
+      endloc: '',
+      predictions: [],
+    };
+    this.onChangeDestinationDebounced = _.debounce(this.onChangeDestination, 1000);
+  }
+  async onChangeDestination(destination) {
+     this.setState({ endloc: destination });
+     const apiURL = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${destination}&types=geocode&language=en&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y&radius=2000`;
+      try {
+        const result = await fetch(apiURL);
+        const json = await result.json();
+        console.log(json);
+        this.setState({
+          predictions: json.predictions
+        });
+      } catch (err) {
+        console.error(err);
+      }
+     
+  }
   renderXButton(){
     return (
       <View style={styles.buttonContainer}>
@@ -16,23 +42,33 @@ class AddRoutePage extends Component {
       </View>
     );
   }
-    render() {
-        return (
-            <View style={styles.container}>
-              {this.renderXButton()}
-              <View style={styles.textContainer}>
-                <Text style={styles.headerText}>Where To?</Text>
-                <TextInput style={styles.textInput}/>
-                <Text style={styles.headerText}>Where From?</Text>
-                <TextInput style={styles.textInput} placeholder={'Your Location'}/>
-              </View>
-              <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 30 }}>
-                <Button onPress={() => Actions.MapPage()}><Text>Let me sleep!</Text></Button>
-              </View>
-            </View>
-           
-        );
-    }
+
+  render() {
+    const predictions = this.state.predictions.map(prediction => (
+      <Text key={prediction.id}>{prediction.description}</Text>
+    ));
+    return (
+        <View style={styles.container}>
+          {this.renderXButton()}
+          <View style={styles.textContainer}>
+            <Text style={styles.headerText}>Where To?</Text>
+            <TextInput style={styles.textInput}/>
+            <Text style={styles.headerText}>Where From?</Text>
+            <TextInput 
+            style={styles.textInput} 
+            placeholder={'Enter Destination'}
+            value={this.state.endloc}
+            onChangeText={destination => this.onChangeDestinationDebounced(destination)}
+            />
+            {predictions}
+          </View>
+          <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 30 }}>
+            <Button onPress={() => Actions.MapPage()}><Text>Let me sleep!</Text></Button>
+          </View>
+        </View>
+        
+    );
+  }
 }
 export default AddRoutePage;
 const { width, height } = Dimensions.get('window');
