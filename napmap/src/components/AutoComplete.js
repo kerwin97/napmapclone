@@ -1,43 +1,64 @@
-import React from "react";
-import { View, TextInput, TextInputEndEditingEventData } from "react-native";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Button } from '../components/common/Button';
+import _ from 'lodash';
 
-export default class AutoComplete extends React.Component {
+class AutoComplete extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      location:'',
-      predictions:[],
-    }
+    this.state = {
+      destination: '',
+      predictions: [],
+    };
+    // this.onChangeDestinationDebounced = _.debounce(this.onChangeDestination, 1000);
   }
   async onChangeDestination(destination) {
-    this.setState({ endloc: destination });
-    const apiURL = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${destination}&types=geocode&language=en&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y&radius=2000`;
-    try {
-      const result = await fetch(apiURL);
-      const json = await result.json();
-      this.setState({
-        predictions: json
-      })
-    } catch (err) {
-      console.error(err);
-    }
-    
+     this.setState({ destination });
+     const apiURL = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${destination}&types=geocode&language=en&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y&radius=2000`;
+      try {
+        const result = await fetch(apiURL);
+        const json = await result.json();
+        console.log(json);
+        this.setState({
+          predictions: json.predictions
+        });
+      } catch (err) {
+        console.error(err);
+      }
+     
+  }
+  
+  handleOptionPress(option){
+    this.setState({
+      destination: option,
+      predictions: [],
+    })
   }
   render() {
-    
-
+    {/* this is the part for the options */}
+    var endloc = '';
+    const predictions = this.state.predictions.map(prediction => (
+      <TouchableOpacity onPress={() => this.handleOptionPress(prediction.description)}>
+        <Text>{prediction.description}</Text>
+      </TouchableOpacity>
+    ));
     return (
       <View>
         <TextInput 
-          style={this.props.style? this.props.style : styles.textInput} 
-          placeholder={this.props.placeholder}
-          value={this.props.value}
-          onChangeText={destination => this.onChangeDestination(destination)}
-          />
+        style={styles.textInput} 
+        placeholder={this.props.placeholder? this.props.placeholder: null}
+        value={this.state.endloc}
+        onChangeText={destination => this.onChangeDestination(destination)}
+        />
+        {predictions}
       </View>
+          
+        
     );
-    }
+  }
 }
+export default AutoComplete;
 const { width, height } = Dimensions.get('window');
 const backgroundColor = '#404855';
 const styles = StyleSheet.create({
@@ -81,3 +102,4 @@ const styles = StyleSheet.create({
       marginTop: 20,
     },
   });
+  
