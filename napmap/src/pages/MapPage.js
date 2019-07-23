@@ -1,20 +1,55 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 //kerwin: dump your map here -elsa 
 
 class MapPage extends Component {
-    render(){
+    constructor(props){
+      super(props);
+      this.state = { 
+        region: {
+          latitude: 1.3521, 
+          longitude: 103.8198, 
+          latitudeDelta: 0.02664195044303443,
+          longitudeDelta: 0.015142817690068,
+        },
+       
+        error: null,
+      };
+    }
+    
+    componentDidMount() {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      error => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 2000 }
+      );
+    }
+
+    render() {
       return (
         <View style={{ flex: 1 }}>
-          <MapView 
+          {!!this.state.latitude && !!this.state.longitude && 
+          <MapView  
+            initialRegion={{
+              latitude: this.state.latitude,
+              longitude: this.state.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
             provider={PROVIDER_GOOGLE}
             style={{ flex: 1 }}
             showsUserLocation
             followsUserLocation
-          />
+          />}
+          {/* <Marker coordinate={this.state} />  */}
         </View>
       );
     }
