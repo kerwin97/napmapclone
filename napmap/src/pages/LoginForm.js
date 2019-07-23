@@ -10,6 +10,10 @@ class LoginForm extends Component {
   //this function will then call the action
   //the action will call the reducer
   //the reducer will change the state of the LoginForm
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log(user);
+  });
+}
   onEmailChange(text) {
     this.props.emailChanged(text);
     //now emailChanged is connected to this component as a prop
