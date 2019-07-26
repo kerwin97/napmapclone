@@ -13,7 +13,7 @@ class AutoComplete extends Component {
       userPos: '',
       chosenOption: '',
     };
-    this.onChangeDestinationDebounced = _.debounce(this.onChangeDestination, 1000);
+    this.onChangeDestinationDebounced = _.debounce(this.onChangeDestination, 750);
   }
   componentWillMount() {
     this.getCurrentPostion();
@@ -81,7 +81,7 @@ class AutoComplete extends Component {
         onChangeText={destination => this.onChangeDestinationDebounced(destination)}
         />
         {
-        predictions ?
+        predictions.length ?
         <View style={{paddingTop:5, backgroundColor:'white'}}>
           {predictions}
         </View>
