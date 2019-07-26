@@ -19,7 +19,19 @@ class MapPage extends Component {
         error: null,
       };
     }
-    
+    renderXButton(){
+      return (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity 
+          onPress={() => Actions.pop()}
+          activeOpacity={0.1}>
+              <Image 
+              style={{width: 25, height: 25}} 
+              source={require('../components/common/images/x-button.png')} />
+          </TouchableOpacity>
+        </View>
+      );
+    }
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({
@@ -36,6 +48,7 @@ class MapPage extends Component {
     render() {
       return (
         <View style={{ flex: 1 }}>
+          {this.renderXButton()}
           {!!this.state.latitude && !!this.state.longitude && 
           <MapView  
             initialRegion={{
@@ -94,11 +107,19 @@ const styles = StyleSheet.create({
       // backgroundColor: 'blue',
     },
     buttonContainer: {
-      // backgroundColor: 'green',
-      alignItems: 'flex-end',
-      marginLeft: 40,
-      // marginTop: 50,
-      
+      position: 'absolute',
+      top: 55, 
+      left: 20,
+      zIndex: 1,
+      height: 50, 
+      width: 50,
+      borderRadius: 25,
+      backgroundColor: 'white',
+      shadowOpacity: 0.2, 
+      justifyContent: 'center',
+      alignItems: 'center',
+      shadowOffset: { height:0, width: 0},
+      elevation: 1
     },
     cardContainer: {
       // backgroundColor: 'red',
