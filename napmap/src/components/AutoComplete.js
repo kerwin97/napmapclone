@@ -20,7 +20,7 @@ class AutoComplete extends Component {
   }
   async onChangeDestination(destination) {
      this.setState({ destination });
-     const apiURL = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${destination}&types=geocode&language=en&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y&radius=2000`;
+     const apiURL = `https://maps.googleapis.com/maps/api/place/queryautocomplete/json?input=${destination}&types=establishment&language=en&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y&radius=50000&location=1.3521,103.8198`;
       try {
         const result = await fetch(apiURL);
         const json = await result.json();
@@ -49,10 +49,14 @@ class AutoComplete extends Component {
     })
   }
   renderTextInput(){
-    const predictions = this.state.predictions.map(prediction => (
-      <TouchableOpacity onPress={() => this.handleOptionPress(prediction)}>
-        <Text>{prediction.description}</Text>
-      </TouchableOpacity>
+  
+    const predictions = this.state.predictions.map((prediction) => (
+      <View style={styles.predictions}>
+        <TouchableOpacity onPress={() => this.handleOptionPress(prediction)}>
+          <Text>{prediction.description}</Text>
+        </TouchableOpacity>
+      </View>
+
     ));
 
     if(this.state.chosenOption){
@@ -76,15 +80,18 @@ class AutoComplete extends Component {
         value={this.state.endloc}
         onChangeText={destination => this.onChangeDestinationDebounced(destination)}
         />
-        {predictions}
+        {
+        predictions ?
+        <View style={{paddingTop:5, backgroundColor:'white'}}>
+          {predictions}
+        </View>
+        : null
+        }
       </View>
     );
   }
   
   render() {
-    console.log(this.state.userPos);
-    console.log(this.state.destination);
-    
     return (
       this.renderTextInput());
   }
@@ -132,5 +139,12 @@ const styles = StyleSheet.create({
       color: 'white',
       marginTop: 20,
     },
+    predictions: {
+      height: 30, 
+      justifyContent: 'center',
+      width : width - 50,
+      backgroundColor: 'white',
+      paddingHorizontal: 10,
+    }
   });
   
