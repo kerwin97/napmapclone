@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-
+import { Button } from '../components/common/Button';
 //kerwin: dump your map here -elsa 
 
 class MapPage extends Component {
@@ -44,16 +44,25 @@ class MapPage extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 2000 }
       );
     }
-
+    renderConfirmButton() {
+      return(
+        <View style={styles.buttonContainer2}>
+          <Button>
+            Confirm
+          </Button>
+        </View>
+      );
+    }
     render() {
       return (
         <View style={{ flex: 1 }}>
           {this.renderXButton()}
+          {this.renderConfirmButton()}
           {!!this.state.latitude && !!this.state.longitude && 
-          <MapView  
+          <MapView
             initialRegion={{
-              latitude: this.state.latitude,
-              longitude: this.state.longitude,
+              latitude: this.props.destination.latitude,
+              longitude: this.props.destination.longitude,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
@@ -61,18 +70,28 @@ class MapPage extends Component {
             style={{ flex: 1 }}
             showsUserLocation
             followsUserLocation
-          />}
-          {/* <Marker coordinate={this.state} />  */}
+          >
+            <Marker 
+            coordinate={this.props.destination} 
+            /> 
+          </MapView>
+          }
+          
         </View>
       );
     }
 }
+// MapPage.propTypes = {
+//   destination: PropTypes.object.isRequired
+// };
+
+export default MapPage;
 
 const backgroundColor = '#404855';
 const { width, height } = Dimensions.get('window');
 const circleSize = 60;
 
-export default MapPage;
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -115,6 +134,20 @@ const styles = StyleSheet.create({
       width: 50,
       borderRadius: 25,
       backgroundColor: 'white',
+      shadowOpacity: 0.2, 
+      justifyContent: 'center',
+      alignItems: 'center',
+      shadowOffset: { height:0, width: 0},
+      elevation: 1
+    },
+    buttonContainer2: {
+      position: 'absolute',
+      bottom: 55, 
+      alignSelf: 'center',
+      zIndex: 1,
+      height: 50, 
+      width: 50,
+      borderRadius: 25,
       shadowOpacity: 0.2, 
       justifyContent: 'center',
       alignItems: 'center',
