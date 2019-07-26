@@ -2,41 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card } from '../components/common/Card';
+import { Button } from '../components/common/Button';
 import firebase from 'firebase';
-
-//using Test array first to fix the ui, will be removed for firebase data later on 
-const testArray = [
-  {
-    key: 0,
-    title: 'work',
-    address: 'NUS Computing, 15 Computing Drive, Singapore'
-  },
-  {
-    key: 1,
-    title: 'work',
-    address: 'NUS Computing, 15 Computing Drive, Singapore'
-  },
-  {
-    key: 2,
-    title: 'work',
-    address: 'NUS Computing, 15 Computing Drive, Singapore'
-  },
-  // {
-  //   key: 3,
-  //   title: 'work',
-  //   address: 'NUS Computing, 15 Computing Drive, Singapore'
-  // },
-  // {
-  //   key: 4,
-  //   title: 'work',
-  //   address: 'NUS Computing, 15 Computing Drive, Singapore'
-  // },
-  // {
-  //   key: 5,
-  //   title: 'work',
-  //   address: 'NUS Computing, 15 Computing Drive, Singapore'
-  // },
-];
+import AutoComplete from '../components/AutoComplete';
 
 class MainPage extends Component {
     constructor(props){
@@ -59,7 +27,8 @@ class MainPage extends Component {
         </View>
       );
     }
-    renderXButton(){
+
+    renderXButton() {
       return (
         <View style={styles.buttonContainer}>
           <TouchableOpacity 
@@ -72,7 +41,8 @@ class MainPage extends Component {
         </View>
       );
     }
-    renderAddRoute(){
+
+    renderAddRoute() {
       return(
         <View style={[styles.cardContainer,{alignItems: 'center'}]}>
           <TouchableOpacity onPress={()=>Actions.AddRoutePage()}>
@@ -85,7 +55,8 @@ class MainPage extends Component {
         </View>
       );
     }
-    renderCards(){
+
+    renderCards() {
       return (
         <View style={styles.cardContainer}>
           {
@@ -106,6 +77,7 @@ class MainPage extends Component {
         </View>
       );
     }
+    
     renderLogOutButton() {
       return (
         <Button
@@ -115,6 +87,7 @@ class MainPage extends Component {
         </Button>
       )
     }
+
     renderSettingsPanel() {
       return this.state.expandedSettings ?
       (
@@ -152,6 +125,7 @@ class MainPage extends Component {
         </View> 
       );
     }
+
     toggleExpanded(){
       this.setState({
         expandedSettings: !this.state.expandedSettings
@@ -161,23 +135,23 @@ class MainPage extends Component {
     render() {
         return (
           <View style={styles.container}>
-            <ScrollView >
+            {/* <ScrollView > */}
             
-              <View style={{flexDirection:'row'}}>
+              
                 {this.renderHeader()}
-                {/* {this.renderXButton()} */}
+              
+              <View style={{alignItems: 'center'}}>
+                <View style={{paddingHorizontal: 20, marginTop: 30, marginBottom: 30 }}>
+                
+                  <AutoComplete placeholder='Destination' />
+                </View>
+                
+                <Button onPress={() => Actions.MapPage()}><Text>Let me sleep!</Text></Button>
               </View>
-                 
-              <View style={{flex:1}}>
-                {this.renderCards()}
-              </View>
-              <View>
-                {this.renderAddRoute()}
-              </View>
-            </ScrollView>
-            <TouchableWithoutFeedback onPress={()=> this.toggleExpanded()}>
+            {/* </ScrollView> */}
+            {/* <TouchableWithoutFeedback onPress={()=> this.toggleExpanded()}>
               {this.renderSettingsPanel()}
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> */}
           </View>
          
         );
