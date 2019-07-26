@@ -10,8 +10,13 @@ class AutoComplete extends Component {
     this.state = {
       destination: '',
       predictions: [],
+      userPos: '',
+      chosenOption: '',
     };
-    // this.onChangeDestinationDebounced = _.debounce(this.onChangeDestination, 1000);
+    this.onChangeDestinationDebounced = _.debounce(this.onChangeDestination, 1000);
+  }
+  componentWillMount() {
+    this.getCurrentPostion();
   }
   async onChangeDestination(destination) {
      this.setState({ destination });
@@ -28,34 +33,60 @@ class AutoComplete extends Component {
       }
      
   }
-  
-  handleOptionPress(option){
+
+
+  getCurrentPostion() {
+    navigator.geolocation.getCurrentPosition(geoSuccess =>
+      this.setState({ userPos: geoSuccess.coords.latitude + ',' + geoSuccess.coords.longitude }));
+      // console.log(geoSuccess));
+  }
+
+  handleOptionPress(prediction){
+    console.log(prediction);
     this.setState({
-      destination: option,
+      chosenOption: prediction,
       predictions: [],
     })
   }
-  render() {
-    {/* this is the part for the options */}
-    var endloc = '';
+  renderTextInput(){
     const predictions = this.state.predictions.map(prediction => (
-      <TouchableOpacity onPress={() => this.handleOptionPress(prediction.description)}>
+      <TouchableOpacity onPress={() => this.handleOptionPress(prediction)}>
         <Text>{prediction.description}</Text>
       </TouchableOpacity>
     ));
+
+    if(this.state.chosenOption){
+      return(
+        <TouchableOpacity 
+        onPress = {() => this.setState({ chosenOption: null })}>
+          <View style ={[styles.textInput, { justifyContent: 'center'} ]}>
+            <Text>
+              {this.state.chosenOption.description}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
     return (
+
       <View>
         <TextInput 
         style={styles.textInput} 
         placeholder={this.props.placeholder? this.props.placeholder: null}
         value={this.state.endloc}
-        onChangeText={destination => this.onChangeDestination(destination)}
+        onChangeText={destination => this.onChangeDestinationDebounced(destination)}
         />
         {predictions}
       </View>
-          
-        
     );
+  }
+  
+  render() {
+    console.log(this.state.userPos);
+    console.log(this.state.destination);
+    
+    return (
+      this.renderTextInput());
   }
 }
 export default AutoComplete;
