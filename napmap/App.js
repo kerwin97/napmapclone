@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import Router from './Router';
+//import { View, Text } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux'; //middleware for thunk
 import firebase from 'firebase';
+import ReduxThunk from 'redux-thunk';
+import reducers from './src/reducers'; //getting a list of all reducers from index of reducers
+//import LoginForm from './components/LoginForm';
+import Router from './Router';
 
-//for testing!! 
+//for testing!!
 console.disableYellowBox = true;
 class App extends Component {
   componentWillMount() {
@@ -17,10 +22,16 @@ class App extends Component {
       appId: '1:144458250987:web:0672f32d844b5bfa',
     });
   }
-  
+
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    //installing ReduxThunk into the store
+    //Thunk helps to send to all components states
+
     return (
-     <Router />
+      <Provider store={store}>
+        <Router />
+      </Provider>
     );
   }
 }

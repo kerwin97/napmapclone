@@ -5,7 +5,8 @@ import {
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER
+  LOGIN_USER,
+  SIGNUP_USER
 } from './types';
 
 
@@ -24,6 +25,17 @@ export const passwordChanged = (text) => {
   };
 };
 
+export const signupUser = ({ email, password }) => {
+  return (dispatch) => {
+    //this text in type is what links the action and reducer
+    dispatch({ type: SIGNUP_USER });
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => loginUserSuccess(dispatch, user))
+      .catch(user => loginUserFail(dispatch, user));
+  };
+};
+
 export const loginUser = ({ email, password }) => {
   //dispatch is so that loginUser and loading can happen together
   //dispatch is manual so provides more control
@@ -36,10 +48,7 @@ export const loginUser = ({ email, password }) => {
       .then(user => loginUserSuccess(dispatch, user))
       .catch((error) => {
         console.log(error);
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(user => loginUserSuccess(dispatch, user))
-          .catch(user => loginUserFail(dispatch, user));
-        });
+      });
   };
 };
 
@@ -48,7 +57,7 @@ const loginUserSuccess = (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-  Actions.main();
+  Actions.MainPage();
   //employeeList from the router was transferred to { Actions }
 };
 

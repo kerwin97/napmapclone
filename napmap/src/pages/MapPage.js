@@ -3,35 +3,23 @@ import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, 
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Button } from '../components/common/Button';
-//kerwin: dump your map here -elsa 
+//kerwin: dump your map here -elsa
 
 class MapPage extends Component {
-    constructor(props){
+    constructor(props) {
       super(props);
-      this.state = { 
+      this.state = {
         region: {
-          latitude: 1.3521, 
-          longitude: 103.8198, 
+          latitude: 1.3521,
+          longitude: 103.8198,
           latitudeDelta: 0.02664195044303443,
           longitudeDelta: 0.015142817690068,
         },
-       
+
         error: null,
       };
     }
-    renderXButton(){
-      return (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity 
-          onPress={() => Actions.pop()}
-          activeOpacity={0.1}>
-              <Image 
-              style={{width: 25, height: 25}} 
-              source={require('../components/common/images/x-button.png')} />
-          </TouchableOpacity>
-        </View>
-      );
-    }
+
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({
@@ -44,6 +32,21 @@ class MapPage extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 2000 }
       );
     }
+
+    renderXButton() {
+      return (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+          onPress={() => Actions.pop()}
+          activeOpacity={0.1}>
+              <Image
+              style={{width: 25, height: 25}}
+              source={require('../components/common/images/x-button.png')} />
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    
     renderConfirmButton() {
       return(
         <View style={styles.buttonContainer2}>
@@ -58,7 +61,7 @@ class MapPage extends Component {
         <View style={{ flex: 1 }}>
           {this.renderXButton()}
           {this.renderConfirmButton()}
-          {!!this.state.latitude && !!this.state.longitude && 
+          {!!this.state.latitude && !!this.state.longitude &&
           <MapView
             initialRegion={{
               latitude: this.props.destination.latitude,
@@ -71,12 +74,12 @@ class MapPage extends Component {
             showsUserLocation
             followsUserLocation
           >
-            <Marker 
-            coordinate={this.props.destination} 
-            /> 
+            <Marker
+            coordinate={this.props.destination}
+            />
           </MapView>
           }
-          
+
         </View>
       );
     }
@@ -127,14 +130,14 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
       position: 'absolute',
-      top: 55, 
+      top: 55,
       left: 20,
       zIndex: 1,
-      height: 50, 
+      height: 50,
       width: 50,
       borderRadius: 25,
       backgroundColor: 'white',
-      shadowOpacity: 0.2, 
+      shadowOpacity: 0.2,
       justifyContent: 'center',
       alignItems: 'center',
       shadowOffset: { height:0, width: 0},
@@ -142,13 +145,13 @@ const styles = StyleSheet.create({
     },
     buttonContainer2: {
       position: 'absolute',
-      bottom: 55, 
+      bottom: 55,
       alignSelf: 'center',
       zIndex: 1,
-      height: 50, 
+      height: 50,
       width: 50,
       borderRadius: 25,
-      shadowOpacity: 0.2, 
+      shadowOpacity: 0.2,
       justifyContent: 'center',
       alignItems: 'center',
       shadowOffset: { height:0, width: 0},
@@ -158,7 +161,7 @@ const styles = StyleSheet.create({
       // backgroundColor: 'red',
       width: width,
     },
-    cardTitle: { 
+    cardTitle: {
       fontFamily: 'arial',
       fontSize: 25,
       fontWeight: '500',
@@ -172,9 +175,9 @@ const styles = StyleSheet.create({
     },
     circle: {
       backgroundColor: 'white',
-      height: circleSize, 
-      width: circleSize, 
-      borderRadius: circleSize/2, 
+      height: circleSize,
+      width: circleSize,
+      borderRadius: circleSize/2,
       alignItems: 'center',
       justifyContent: 'center',
     }
