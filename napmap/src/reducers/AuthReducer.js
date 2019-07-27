@@ -4,7 +4,8 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
-  SIGNUP_USER
+  SIGNUP_USER,
+  SIGNUP_USER_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -47,13 +48,15 @@ export default (state = INITIAL_STATE, action) => {
         loading: false
       };
     case SIGNUP_USER:
-      return {
-        ...state,
-        user: '',
-        error: '',
-        loading: false,
-        password: ''
-       };
+      return { ...state, loading: true };
+    case SIGNUP_USER_SUCCESS:
+    return {
+      ...state,
+      user: '',
+      error: '',
+      loading: false,
+      password: ''
+     };
     default:
       return state;
  }

@@ -14,12 +14,11 @@ class RouterComponent extends Component {
             <Router gesturesEnabled={false}>
                 <Scene key="root" hideNavBar>
                     <Scene
-                      initial
                       key="LoginForm2"
                       component={LoginForm2}
                       hideNavBar
-                    />                
-                    <Scene key="MainPage" component={MainPage} hideNavBar />
+                    />
+                    <Scene initial key="MainPage" component={MainPage} hideNavBar />
                     <Scene key="JourneyPage" component={JourneyPage} hideNavBar />
                     <Scene key="ProfilePage" component={ProfilePage} hideNavBar />
                     <Scene key="AddRoutePage" component={AddRoutePage} hideNavBar />

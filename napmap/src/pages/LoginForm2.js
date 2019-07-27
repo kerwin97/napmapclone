@@ -22,21 +22,24 @@ class LoginForm2 extends Component {
     this.props.loginUser({ email, password });
   }
     //signup
-    onSignUpButtonPress() {
-      const { email, password } = this.props;
+  onSignUpButtonPress() {
+    const { email, password } = this.props;
 
-      this.props.signupUser({ email, password });
+    this.props.signupUser({ email, password });
+  }
+
+  renderSignUpButton() {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
     }
+      return (
+          <Button onPress={() => this.onSignUpButtonPress.bind(this)}>
+             Sign up
+          </Button>
+          );
+  }
 
-    renderSignUpButton() {
-        return (
-            <Button onPress={() => this.onSignUpButtonPress.bind(this)}>
-               Sign up
-            </Button>
-            );
-    }
-
-    //if login fails
+  //if login fails
       renderError() {
         if (this.props.error) {
           return (

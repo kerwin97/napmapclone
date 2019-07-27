@@ -6,7 +6,8 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
-  SIGNUP_USER
+  SIGNUP_USER,
+  SIGNUP_USER_SUCCESS
 } from './types';
 
 
@@ -31,8 +32,10 @@ export const signupUser = ({ email, password }) => {
     dispatch({ type: SIGNUP_USER });
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => loginUserSuccess(dispatch, user))
-      .catch(user => loginUserFail(dispatch, user));
+      .then(user => signupUserSuccess(dispatch, user))
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };
 
@@ -46,8 +49,9 @@ export const loginUser = ({ email, password }) => {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
-      .catch((error) => {
+      .catch((user, error) => {
         console.log(error);
+        loginUserFail(dispatch, user);
       });
   };
 };
@@ -65,4 +69,13 @@ const loginUserFail = (dispatch) => {
   dispatch({
     type: LOGIN_USER_FAIL
    });
+};
+
+const signupUserSuccess = (dispatch, user) => {
+  dispatch({
+    type: SIGNUP_USER_SUCCESS,
+    payload: user
+  });
+  Actions.MainPage();
+  //employeeList from the router was transferred to { Actions }
 };
