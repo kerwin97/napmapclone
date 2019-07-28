@@ -43,6 +43,7 @@ class AutoComplete extends Component {
 
   handleOptionPress(prediction){
     console.log(prediction);
+    this.props.handlePress(prediction);
     this.setState({
       chosenOption: prediction,
       predictions: [],

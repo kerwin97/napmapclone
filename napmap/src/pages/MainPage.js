@@ -11,7 +11,8 @@ class MainPage extends Component {
     constructor(props){
       super(props);
       this.state = {
-        expandedSettings: false
+        destination: null,
+        currentPos: null,
       };
     }
     Capitalize(str) {
@@ -153,7 +154,18 @@ class MainPage extends Component {
     // handleNextPage(){
     //   if(this.state.chosenOption)
     // }
-
+    handlePress = (prediction) => {
+      this.setState({
+        destination: prediction,
+      });
+    }
+    goToNextPage() {
+      if (this.state.destination){
+        Actions.MapPage({ destination: this.state.destination });
+      }else{
+        alert('You haven\'t entered a location!');
+      }
+    }
     render() {
         return (
           <View style={styles.container}>
@@ -165,10 +177,10 @@ class MainPage extends Component {
                   {/* {this.renderAlarmButton()} */}
                 <View style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 30 }}>
 
-                  <AutoComplete placeholder='Destination' />
+                  <AutoComplete placeholder='Destination' handlePress={this.handlePress} />
                 </View>
 
-                <Button onPress={() => Actions.MapPage()}><Text>Let me sleep!</Text></Button>
+                <Button onPress={() => this.goToNextPage()}><Text>Let me sleep!</Text></Button>
               </View>
             {/* </ScrollView> */}
             {/* <TouchableWithoutFeedback onPress={()=> this.toggleExpanded()}>
