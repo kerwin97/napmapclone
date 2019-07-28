@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, 
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Button } from '../components/common/Button';
+
 //kerwin: dump your map here -elsa
 
 class MapPage extends Component {
@@ -12,12 +13,16 @@ class MapPage extends Component {
         region: {
           latitude: 1.3521,
           longitude: 103.8198,
-          latitudeDelta: 0.02664195044303443,
-          longitudeDelta: 0.015142817690068,
+          latitudeDelta: 0.001664195044303443,
+          longitudeDelta: 0.0015142817690068,
         },
-
+        dLat: null,
+        dLng: null,
         error: null,
       };
+    }
+    componentWillMount() {
+      this.getDestinationLatLng();
     }
 
     componentDidMount() {
@@ -32,7 +37,21 @@ class MapPage extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 2000 }
       );
     }
-
+    async getDestinationLatLng() {
+      const placeid = this.props.destination.place_id; 
+      const apiURL = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeid}&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y`;
+      try {
+        const result = await fetch(apiURL);
+        const json = await result.json();
+        const loc = json.results[0].geometry.location;
+        this.setState({
+          dLat: loc.lat,
+          dLng: loc.lng,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    }
     renderXButton() {
       return (
         <View style={styles.buttonContainer}>
@@ -61,13 +80,13 @@ class MapPage extends Component {
         <View style={{ flex: 1 }}>
           {this.renderXButton()}
           {this.renderConfirmButton()}
-          {!!this.state.latitude && !!this.state.longitude &&
+          {!!this.state.dLat && !!this.state.dLng &&
           <MapView
             initialRegion={{
-              latitude: this.props.destination.latitude,
-              longitude: this.props.destination.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+              latitude: this.state.dLat,
+              longitude: this.state.dLng,
+              latitudeDelta: 0.05,
+              longitudeDelta: 0.01,
             }}
             provider={PROVIDER_GOOGLE}
             style={{ flex: 1 }}
@@ -75,7 +94,7 @@ class MapPage extends Component {
             followsUserLocation
           >
             <Marker
-            coordinate={this.props.destination}
+            coordinate={{latitude: this.state.dLat, longitude: this.state.dLng}}
             />
           </MapView>
           }
@@ -84,9 +103,6 @@ class MapPage extends Component {
       );
     }
 }
-// MapPage.propTypes = {
-//   destination: PropTypes.object.isRequired
-// };
 
 export default MapPage;
 
