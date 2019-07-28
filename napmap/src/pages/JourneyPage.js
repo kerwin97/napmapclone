@@ -26,6 +26,16 @@ class JourneyPage extends Component {
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+  renderHeader() {
+    return (
+      <View style={styles.headerContainer}>
+        <Text
+          style={styles.headerText} >
+          Relax, we'll wake you up when you're there.
+        </Text>
+      </View>
+    );
+  }
   renderXButton(){
     return (
       <View style={styles.buttonContainer}>
@@ -74,30 +84,33 @@ class JourneyPage extends Component {
   }
   render() {
       return (
+          // <View style={styles.container}>
+          //   <ScrollView>
+          //   <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 50, marginRight: 20, }}>
+          //     {this.renderXButton()}
+          //     <Button onPress={() => Actions.MapPage()}><Text>view in map</Text></Button>
+          //   </View>
+          //   <View style={{ flexDirection: 'row' }}>
+          //     <Image 
+          //     style={{
+          //       shadowColor: '#000', 
+          //       shadowOffset: { width: 0, height: 0 }, 
+          //       shadowOpacity: 0.5, 
+          //       width: 150, 
+          //       height: 150,
+          //       marginLeft: 30,
+          //       marginTop: 15,
+          //     }}
+          //     source={require('../components/common/images/sloth.png')}/>
+          //     {this.renderTimeLeft(20)}
+          //   </View>
+          //   <View style={{ marginTop: 20 }}>
+          //     {this.renderCards()}
+          //   </View>
+          //   </ScrollView>
+          // </View>
           <View style={styles.container}>
-            <ScrollView>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 50, marginRight: 20, }}>
-              {this.renderXButton()}
-              <Button onPress={() => Actions.MapPage()}><Text>view in map</Text></Button>
-            </View>
-            <View style={{ flexDirection: 'row' }}>
-              <Image 
-              style={{
-                shadowColor: '#000', 
-                shadowOffset: { width: 0, height: 0 }, 
-                shadowOpacity: 0.5, 
-                width: 150, 
-                height: 150,
-                marginLeft: 30,
-                marginTop: 15,
-              }}
-              source={require('../components/common/images/sloth.png')}/>
-              {this.renderTimeLeft(20)}
-            </View>
-            <View style={{ marginTop: 20 }}>
-              {this.renderCards()}
-            </View>
-            </ScrollView>
+                {this.renderHeader()}
           </View>
           
       );

@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import firebase from 'firebase';
+// import RNLocation from 'react-native-location';
 import AutoComplete from '../components/AutoComplete';
 
 class MainPage extends Component {
@@ -13,7 +14,6 @@ class MainPage extends Component {
         expandedSettings: false
       };
     }
-
     Capitalize(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     }
@@ -150,6 +150,9 @@ class MainPage extends Component {
         expandedSettings: !this.state.expandedSettings
       });
     }
+    // handleNextPage(){
+    //   if(this.state.chosenOption)
+    // }
 
     render() {
         return (
@@ -159,7 +162,7 @@ class MainPage extends Component {
 
                 {this.renderHeader()}
               <View style={{ alignItems: 'center' }} >
-                  {this.renderAlarmButton()}
+                  {/* {this.renderAlarmButton()} */}
                 <View style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 30 }}>
 
                   <AutoComplete placeholder='Destination' />

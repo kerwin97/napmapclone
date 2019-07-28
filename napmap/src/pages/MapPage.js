@@ -50,7 +50,7 @@ class MapPage extends Component {
     renderConfirmButton() {
       return(
         <View style={styles.buttonContainer2}>
-          <Button>
+          <Button onPress={() => Actions.JourneyPage()}>
             Confirm
           </Button>
         </View>
