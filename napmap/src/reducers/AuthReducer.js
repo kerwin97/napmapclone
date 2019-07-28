@@ -50,13 +50,13 @@ export default (state = INITIAL_STATE, action) => {
     case SIGNUP_USER:
       return { ...state, loading: true };
     case SIGNUP_USER_SUCCESS:
-    return {
-      ...state,
-      user: '',
-      error: '',
-      loading: false,
-      password: ''
-     };
+      return {
+        ...state,
+        user: '',
+        error: '',
+        loading: false,
+        password: ''
+       };
     default:
       return state;
  }
