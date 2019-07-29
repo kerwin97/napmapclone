@@ -16,8 +16,10 @@ class MapPage extends Component {
           latitudeDelta: 0.001664195044303443,
           longitudeDelta: 0.0015142817690068,
         },
-        dLat: null,
+        dLat: null, //destination
         dLng: null,
+        cLat: null, //current
+        cLng: null,
         error: null,
       };
     }
@@ -28,8 +30,8 @@ class MapPage extends Component {
     componentDidMount() {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          cLat: position.coords.latitude,
+          cLng: position.coords.longitude,
           error: null,
         });
       },
@@ -65,11 +67,18 @@ class MapPage extends Component {
         </View>
       );
     }
+    goToNextPage = () => {
+      Actions.JourneyPage(
+        { 
+          destination: this.state.dLat + ',' + this.state.dLng,
+          currentPos: this.state.cLat + ',' + this.state.cLng,
     
+        });
+    }
     renderConfirmButton() {
       return(
         <View style={styles.buttonContainer2}>
-          <Button onPress={() => Actions.JourneyPage()}>
+          <Button onPress={this.goToNextPage}>
             Confirm
           </Button>
         </View>
@@ -85,8 +94,8 @@ class MapPage extends Component {
             initialRegion={{
               latitude: this.state.dLat,
               longitude: this.state.dLng,
-              latitudeDelta: 0.05,
-              longitudeDelta: 0.01,
+              latitudeDelta: 0.003,
+              longitudeDelta: 0.002,
             }}
             provider={PROVIDER_GOOGLE}
             style={{ flex: 1 }}

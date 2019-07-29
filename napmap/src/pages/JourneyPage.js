@@ -1,28 +1,16 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
+import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Dimensions, SafeAreaView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 
-const testArray = [
-  {
-    transportMode: {
-      mode: 'Bus',
-      modeDetail: '7'
-    },
-    
-    takeFrom: 'Orchard Road'
-  },
-  {
-    transportMode: {
-      mode: 'EW line',
-      modeDetail: 'to joo koon'
-    },
-    
-    takeFrom: 'clementi'
-  },
-];
 class JourneyPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      directions: [],
+    };
+  }
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -31,10 +19,27 @@ class JourneyPage extends Component {
       <View style={styles.headerContainer}>
         <Text
           style={styles.headerText} >
-          Relax, we'll wake you up when you're there.
+          Relax, we'll wake you up ;-)
         </Text>
       </View>
     );
+  }
+  componentWillMount() {
+    this.getRouteConfig();
+  }
+  async getRouteConfig () {
+
+    const apiURL = `https://maps.googleapis.com/maps/api/directions/json?mode=transit&origin=${this.props.currentPos}&destination=${this.props.destination}&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y`;
+    try {
+      const result = await fetch(apiURL);
+      const json = await result.json();
+      console.log(json);
+      this.setState({
+        directions: json.routes[0].legs[0].steps
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
   renderXButton(){
     return (
@@ -50,24 +55,18 @@ class JourneyPage extends Component {
     );
   }
   renderCards(){
+    
     return (
-      <View style={styles.cardContainer}>
-        {
-          testArray.map((item) => 
-          (
-          <TouchableOpacity>
-            <Card>
-              <View style={{ marginHorizontal: 25, marginVertical: 15, }}>
-                <Text style={styles.cardTitle}>{this.Capitalize(item.transportMode.mode) + " " + item.transportMode.modeDetail}</Text>
-                <View style={{marginTop: 10}}>
-                <Text style={styles.cardSubtitle}>{'Take From: ' + this.Capitalize(item.takeFrom)}</Text>
-                </View>
-              </View>
-            </Card>
-          </TouchableOpacity>
-          )
-          )}
+      <Card style={styles.cardContainer}>
+        <Text style={styles.cardTitle}>Route Summary</Text>
+      {this.state.directions.map((direction) => 
+      (
+      <View>
+        <Text>{direction.html_instructions}</Text>
+        <Text>{direction.duration.text}</Text>
       </View>
+      ))}
+      </Card>
     );
   }
   renderTimeLeft(time){
@@ -83,35 +82,12 @@ class JourneyPage extends Component {
     );
   }
   render() {
+    console.log(this.state.directions);
       return (
-          // <View style={styles.container}>
-          //   <ScrollView>
-          //   <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 50, marginRight: 20, }}>
-          //     {this.renderXButton()}
-          //     <Button onPress={() => Actions.MapPage()}><Text>view in map</Text></Button>
-          //   </View>
-          //   <View style={{ flexDirection: 'row' }}>
-          //     <Image 
-          //     style={{
-          //       shadowColor: '#000', 
-          //       shadowOffset: { width: 0, height: 0 }, 
-          //       shadowOpacity: 0.5, 
-          //       width: 150, 
-          //       height: 150,
-          //       marginLeft: 30,
-          //       marginTop: 15,
-          //     }}
-          //     source={require('../components/common/images/sloth.png')}/>
-          //     {this.renderTimeLeft(20)}
-          //   </View>
-          //   <View style={{ marginTop: 20 }}>
-          //     {this.renderCards()}
-          //   </View>
-          //   </ScrollView>
-          // </View>
-          <View style={styles.container}>
+          <SafeAreaView style={styles.container}>
                 {this.renderHeader()}
-          </View>
+                {this.renderCards()}
+          </SafeAreaView>
           
       );
   }
@@ -144,12 +120,13 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   headerContainer: {
-    marginTop: 25,
+    // marginTop: 25,
     marginLeft: 30,
     width: width * 2 / 3,
-    height: height / 4,
+    // height: height / 4,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 35,  
     // backgroundColor: 'blue',
   },
   buttonContainer: {
@@ -162,10 +139,11 @@ const styles = StyleSheet.create({
   cardContainer: {
     // backgroundColor: 'red',
     width: width,
+    padding: 15
   },
   cardTitle: { 
     fontFamily: 'arial',
-    fontSize: 25,
+    fontSize: 15,
     fontWeight: '500',
     color: '#707070',
   },
