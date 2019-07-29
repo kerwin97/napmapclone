@@ -9,11 +9,11 @@ import {
   EMPLOYEE_SAVE_SUCCESS
 } from './types';
 
-export const destinationChanged = (text) => {
+export const destinationChanged = (destination) => {
   return {
     //this text in type is what links the action and reducer
     type: DESTINATION_CHANGED,
-    payload: text
+    payload: destination
   };
 };
 

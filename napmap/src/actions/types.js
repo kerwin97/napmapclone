@@ -13,3 +13,4 @@ export const EMPLOYEE_UPDATE = 'employee_update';
 export const LOCATION_UPDATE = 'location_update';
 export const DESTINATION_CREATE = 'destination_create';
 export const DESTINATION_REACHED = 'destination_reached';
+export const DESTINATION_CHANGED = 'destination_changed';
