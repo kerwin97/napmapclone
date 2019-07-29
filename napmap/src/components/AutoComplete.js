@@ -50,14 +50,14 @@ class AutoComplete extends Component {
     this.setState({
       chosenOption: prediction,
       predictions: [],
-    })
+    });
   }
   renderTextInput(){
   
     const predictions = this.state.predictions.map((prediction) => (
       <View style={styles.predictions}>
         <TouchableOpacity onPress={() => this.handleOptionPress(prediction)}>
-          <Text>{prediction.description}</Text>
+          <Text style={{color: 'white'}}>{prediction.description}</Text>
         </TouchableOpacity>
       </View>
 
@@ -86,7 +86,7 @@ class AutoComplete extends Component {
         />
         {
         predictions.length ?
-        <View style={{paddingTop:5, backgroundColor:'white'}}>
+        <View style={{paddingTop:5, backgroundColor:'#97A3BA', padding: 10, borderRadius: 15, marginTop: 15, width: width -50,}}>
           {predictions}
         </View>
         : null
@@ -144,11 +144,12 @@ const styles = StyleSheet.create({
       marginTop: 20,
     },
     predictions: {
-      height: 30, 
+      // height: 30, 
       justifyContent: 'center',
-      width : width - 50,
-      backgroundColor: 'white',
+      width : width - 70,
+      // backgroundColor: 'white',
       paddingHorizontal: 10,
+      paddingBottom: 10,
     }
   });
   
