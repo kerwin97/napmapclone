@@ -23,9 +23,14 @@ class LoginForm2 extends Component {
     //now emailChanged is connected to this component as a prop
   }
   onLoginSuccess() {
-    this.setState({loading:false});
+    this.setState({ loading: false });
     Actions.MainPage();
 }
+  onSignUpSuccess() {
+    alert('Awesome! now you can log in with these credentials');
+    this.setState({ loading: false });
+    setTimeout(() => Actions.MainPage(), 2000);
+  }
 
   onPasswordChange(text) {
     this.props.passwordChanged(text);
@@ -33,12 +38,13 @@ class LoginForm2 extends Component {
     //login
     onButtonPress() {
       // console.log('hello');
-      this.setState({loading: true});
+      this.setState({ loading: true });
       firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(this.onLoginSuccess.bind(this))
       .catch((error) => { 
         console.log(error);
           alert('log in fail');
+          this.setState({ loading: false });
       });
   }
 
@@ -46,10 +52,11 @@ class LoginForm2 extends Component {
   onSignUpButtonPress(){
           this.setState({loading: true});
          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-         .then(this.onLoginSuccess.bind(this))
+         .then(this.onSignUpSuccess.bind(this))
          .catch((error) => {
            console.log(error);
             alert(error.message);
+            this.setState({ loading: false });
          })
      }
 
