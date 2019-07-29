@@ -34,7 +34,10 @@ class AutoComplete extends Component {
      
   }
 
-
+  handleClear = () => {
+    this.props.clearAutoComplete();
+    this.setState({ chosenOption: null });
+  }
   getCurrentPostion() {
     navigator.geolocation.getCurrentPosition(geoSuccess =>
       this.setState({ userPos: geoSuccess.coords.latitude + ',' + geoSuccess.coords.longitude }));
@@ -63,7 +66,7 @@ class AutoComplete extends Component {
     if(this.state.chosenOption){
       return(
         <TouchableOpacity 
-        onPress = {() => this.setState({ chosenOption: null })}>
+        onPress = {this.handleClear}>
           <View style ={[styles.textInput, { justifyContent: 'center'} ]}>
             <Text>
               {this.state.chosenOption.description}

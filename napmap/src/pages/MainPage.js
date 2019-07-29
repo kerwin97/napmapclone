@@ -166,6 +166,11 @@ class MainPage extends Component {
         alert('You haven\'t entered a location!');
       }
     }
+    clearAutoComplete = () => {
+      this.setState({
+        destination: null,
+      });
+    }
     render() {
         return (
           <View style={styles.container}>
@@ -177,7 +182,7 @@ class MainPage extends Component {
                   {/* {this.renderAlarmButton()} */}
                 <View style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 30 }}>
 
-                  <AutoComplete placeholder='Destination' handlePress={this.handlePress} />
+                  <AutoComplete placeholder='Destination' handlePress={this.handlePress} clearAutoComplete={this.clearAutoComplete} />
                 </View>
 
                 <Button onPress={() => this.goToNextPage()}><Text>Let me sleep!</Text></Button>
