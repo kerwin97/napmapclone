@@ -1,39 +1,64 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { emailChanged, passwordChanged, loginUser, signupUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from '../components/common';
+import firebase from 'firebase';
 
 
 class LoginForm2 extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+        email: '',
+        password: '',
+        loading: false,
+        loggedIn: false,
+        error: true,
+    };
+}
   onEmailChange(text) {
     this.props.emailChanged(text);
     //now emailChanged is connected to this component as a prop
   }
+  onLoginSuccess() {
+    this.setState({loading:false});
+    Actions.MainPage();
+}
 
   onPasswordChange(text) {
     this.props.passwordChanged(text);
   }
     //login
-  onButtonPress() {
-    const { email, password } = this.props;
-
-    this.props.loginUser({ email, password });
+    onButtonPress() {
+      // console.log('hello');
+      this.setState({loading: true});
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(this.onLoginSuccess.bind(this))
+      .catch((error) => { 
+        console.log(error);
+          alert('log in fail');
+      });
   }
+
     //signup
-  onSignUpButtonPress() {
-    const { email, password } = this.props;
-
-    this.props.signupUser({ email, password });
-  }
+  onSignUpButtonPress(){
+          this.setState({loading: true});
+         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+         .then(this.onLoginSuccess.bind(this))
+         .catch((error) => {
+           console.log(error);
+            alert(error.message);
+         })
+     }
 
   renderSignUpButton() {
-    if (this.props.loading) {
+    if (this.state.loading) {
       return <Spinner size="large" />;
     }
       return (
-          <Button onPress={() => this.onSignUpButtonPress.bind(this)}>
+          <Button onPress={() => this.onSignUpButtonPress()}>
              Sign up
           </Button>
           );
@@ -53,11 +78,11 @@ class LoginForm2 extends Component {
       }
 
     renderButton() {
-      if (this.props.loading) {
+      if (this.state.loading) {
         return <Spinner size="large" />;
       }
         return (
-          <Button onPress={this.onButtonPress.bind(this)}>
+          <Button onPress={() => this.onButtonPress()}>
             Log In
           </Button>
         );
@@ -65,17 +90,16 @@ class LoginForm2 extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', }}>
-                <Card style={styles.containerStyle}>
+            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: backgroundColor, alignItems: 'center'}}>
+              <Text style={styles.headerText}> Sign in </Text>
+                <View style={styles.containerStyle}>
                     <CardSection>
                         <Input
                         autoCapitalize="none"
                         autoCorrect={false}
                         label="Email"
                         placeholder="email@gmail.com"
-                        onChangeText={this.onEmailChange.bind(this)}
-                        //calls the function when something is typed
-                        value={this.props.email}
+                        onChangeText={email => this.setState({ email })}                        //calls the function when something is typed
 
                         />
                     </CardSection>
@@ -87,8 +111,7 @@ class LoginForm2 extends Component {
                         autoCorrect={false}
                         label="Password"
                         placeholder="password"
-                        onChangeText={this.onPasswordChange.bind(this)}
-                        value={this.props.password}
+                        onChangeText={password => this.setState({ password })}                                 
                         />
                     </CardSection>
 
@@ -98,12 +121,13 @@ class LoginForm2 extends Component {
                         {this.renderButton()}
                         {this.renderSignUpButton()}
                     </CardSection>
-                </Card>
+                </View>
             </View>
         );
     }
   }
-
+  const backgroundColor = '#404855';
+  const { width, height } = Dimensions.get('window');
   const styles = {
     errorTextStyle: {
       fontSize: 20,
@@ -115,8 +139,20 @@ class LoginForm2 extends Component {
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.4,
         shadowRadius: 2,
-        elevation: 1
-    }
+        elevation: 1,
+        borderRadius: 15,
+        height: height/3 - 20,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        width: width -30,
+    },
+    headerText: {
+      fontFamily: 'arial',
+      fontWeight: '500',
+      fontSize: 45,
+      color: 'white',
+      paddingBottom: 50
+    },
   };
 
   const mapStateToProps = state => {
