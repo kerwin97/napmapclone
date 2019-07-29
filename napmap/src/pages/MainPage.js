@@ -97,11 +97,14 @@ class MainPage extends Component {
         </View>
       );
     }
-
+    handleLogOut = () => {
+      firebase.auth().signOut;
+      Actions.LoginForm2();
+    }
     renderLogOutButton() {
       return (
         <Button
-        onPress={() => firebase.auth().signOut}
+        onPress={this.handleLogOut}
         >
           Log out
         </Button>
@@ -125,6 +128,10 @@ class MainPage extends Component {
           <View style={{width: 50, height: 5, borderRadius: 2.5, backgroundColor: 'white', marginTop: 15, alignSelf: 'center'}}/>
           <Text style={[styles.headerText, {fontSize: 30, marginLeft: 20}]}>Settings</Text>
           <Text style={[styles.cardSubtitle, { marginLeft: 20, color: 'white', marginTop: 10}]}>Coming Soon!</Text>
+          <View style={{padding: 30, alignSelf: 'center'}}>
+          {this.renderLogOutButton()}
+          </View>
+          
       </View>
       )
       :
@@ -178,7 +185,7 @@ class MainPage extends Component {
 
 
                 {this.renderHeader()}
-              <View style={{ alignItems: 'center' }} >
+              <View style={{ alignItems: 'center', flex: 1 }} >
                   {/* {this.renderAlarmButton()} */}
                 <View style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 30 }}>
 
@@ -188,9 +195,11 @@ class MainPage extends Component {
                 <Button onPress={() => this.goToNextPage()}><Text>Let me sleep!</Text></Button>
               </View>
             {/* </ScrollView> */}
-            {/* <TouchableWithoutFeedback onPress={()=> this.toggleExpanded()}>
+           
+            <TouchableWithoutFeedback onPress={()=> this.toggleExpanded()}>
               {this.renderSettingsPanel()}
-            </TouchableWithoutFeedback> */}
+            </TouchableWithoutFeedback>
+            
           </View>
 
         );
