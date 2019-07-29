@@ -3,7 +3,9 @@ import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, 
 import { Actions } from 'react-native-router-flux';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
+import BackgroundGeolocation from "react-native-background-geolocation";
 import { white } from 'ansi-colors';
+import { tsObjectKeyword } from '@babel/types';
 
 class JourneyPage extends Component {
   constructor(props) {
@@ -14,9 +16,43 @@ class JourneyPage extends Component {
       napDuration: 0, //counts total time on public transport 
     };
   }
+
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  } 
+  componentDidUpdate() {
+    if (this.state.wakeUpStops) {
+      console.log(this.state.wakeUpStops);
+      this.state.wakeUpStops.map(stop  =>
+        BackgroundGeolocation.addGeofence({
+          identifier: stop.stop_name,
+          radius: 400,
+          latitude: stop.lat,
+          longitude: stop.lng,
+          notifyOnEntry: true,
+        })
+      );
+      
+      BackgroundGeolocation.onGeofence(function(geofence, taskId) {
+        try {
+            var identifier = geofence.identifier;
+            var action     = geofence.action;
+            var location   = geofence.location;
+
+            console.log("- A Geofence transition occurred");
+            console.log("  identifier: ", identifier);
+            console.log("  action: ", action);
+            console.log("  location: ", JSON.stringify(location));
+        } catch(e) {
+            console.error("An error occurred in my code!", e);
+        }
+        // Be sure to call #finish!!
+        bgGeo.finish(taskId);
+    });
+    }
+    
   }
+
   renderHeader() {
     return (
       <View style={styles.headerContainer}>
@@ -83,9 +119,9 @@ class JourneyPage extends Component {
   configureText(stop) {
      return (
           <View style={{paddingTop: 5}}>       
-            <Text style={{fontWeight: 500}}>{stop.stop_name}</Text>
-            <Text style={{fontWeight: 300}}>{stop.html_instructions}</Text>
-            <Text style={{fontWeight: 300}}>{stop.duration_text}</Text>
+            <Text style={{fontWeight: '500'}}>{stop.stop_name}</Text>
+            <Text style={{fontWeight: '300'}}>{stop.html_instructions}</Text>
+            <Text style={{fontWeight: '300'}}>{stop.duration_text}</Text>
           </View>
         );
     
@@ -120,9 +156,9 @@ class JourneyPage extends Component {
     );
   }
   render() {
-    console.log('hello');
-    console.log(this.state.wakeUpStops);
+    
       return (
+        
           <SafeAreaView style={styles.container}>
             {this.renderHeader()}
             {this.renderCards()}
