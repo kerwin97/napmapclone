@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, 
 import { Actions } from 'react-native-router-flux';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
+import { white } from 'ansi-colors';
 
 class JourneyPage extends Component {
   constructor(props) {
@@ -54,18 +55,31 @@ class JourneyPage extends Component {
       </View>
     );
   }
+  configureText(direction){
+    switch(direction.travel_mode){
+      case 'WALKING':
+        return null;
+      case 'TRANSIT':
+        return (
+          <View style={{paddingTop: 5}}>       
+            <Text style={{fontWeight: 500}}>{direction.transit_details.arrival_stop.name}</Text>
+            <Text style={{fontWeight: 300}}>{direction.html_instructions}</Text>
+            <Text style={{fontWeight: 300}}>{direction.duration.text}</Text>
+          </View>
+        );
+    }
+  }
   renderCards(){
     
     return (
-      <Card style={styles.cardContainer}>
+      <Card containerStyle={styles.cardContainer}>
         <Text style={styles.cardTitle}>Route Summary</Text>
-      {this.state.directions.map((direction) => 
-      (
-      <View>
-        <Text>{direction.html_instructions}</Text>
-        <Text>{direction.duration.text}</Text>
-      </View>
-      ))}
+        <ScrollView>
+        {this.state.directions.map((direction) => 
+        (
+          this.configureText(direction)
+        ))}
+        </ScrollView>
       </Card>
     );
   }
@@ -85,8 +99,12 @@ class JourneyPage extends Component {
     console.log(this.state.directions);
       return (
           <SafeAreaView style={styles.container}>
-                {this.renderHeader()}
-                {this.renderCards()}
+            {this.renderHeader()}
+            {this.renderCards()}
+            <View style={{alignItems: 'center'}}>
+            <Button onPress={() => Actions.MainPage()}>cancel</Button>
+            </View>
+            
           </SafeAreaView>
           
       );
@@ -138,12 +156,19 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     // backgroundColor: 'red',
-    width: width,
-    padding: 15
+    width: width - 30,
+    margin: 15,
+    height: height/2,
+    backgroundColor: 'white',
+    padding: 15,
+    paddingTop: 25,
+    borderRadius: 15,
+    shadowOpacity: 0.2,
+    shadowOffset: { height: 0, width: 0 },
   },
   cardTitle: { 
     fontFamily: 'arial',
-    fontSize: 15,
+    fontSize: 25,
     fontWeight: '500',
     color: '#707070',
   },
