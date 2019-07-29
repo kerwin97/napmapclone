@@ -10,6 +10,8 @@ class JourneyPage extends Component {
     super(props);
     this.state = {
       directions: [],
+      wakeUpStops: [],
+      napDuration: 0, //counts total time on public transport 
     };
   }
   Capitalize(str) {
@@ -28,21 +30,31 @@ class JourneyPage extends Component {
   componentWillMount() {
     this.getRouteConfig();
   }
-  async getRouteConfig () {
+  async getRouteConfig() {
 
     const apiURL = `https://maps.googleapis.com/maps/api/directions/json?mode=transit&origin=${this.props.currentPos}&destination=${this.props.destination}&key=AIzaSyBNkgiBLRx5GUh8yBnfAdT82Lhp6eF1j3Y`;
     try {
       const result = await fetch(apiURL);
       const json = await result.json();
       console.log(json);
+      const directions = json.routes[0].legs[0].steps;
+      //shit gets real here 
+      const stops = [];
+      directions.map((direction) => 
+      (
+        direction.travel_mode === 'TRANSIT'
+        ? stops.push(this.configDirection(direction))
+        : null
+        // console.log(direction)
+      ));
       this.setState({
-        directions: json.routes[0].legs[0].steps
+        wakeUpStops: stops
       });
     } catch (err) {
       console.error(err);
     }
   }
-  renderXButton(){
+  renderXButton() {
     return (
       <View style={styles.buttonContainer}>
         <TouchableOpacity 
@@ -55,48 +67,61 @@ class JourneyPage extends Component {
       </View>
     );
   }
-  configureText(direction){
-    switch(direction.travel_mode){
-      case 'WALKING':
-        return null;
-      case 'TRANSIT':
-        return (
+
+  configDirection(direction) {
+    const stop = {
+      stop_name: direction.transit_details.arrival_stop.name,
+      html_instructions: direction.html_instructions,
+      duration_value: direction.duration.value, //in seconds
+      duration_text: direction.duration.text,
+      lat: direction.end_location.lat,
+      lng: direction.end_location.lng,
+      num_stops: direction.transit_details.num_stops,
+    };
+    return stop;
+  }
+  configureText(stop) {
+     return (
           <View style={{paddingTop: 5}}>       
-            <Text style={{fontWeight: 500}}>{direction.transit_details.arrival_stop.name}</Text>
-            <Text style={{fontWeight: 300}}>{direction.html_instructions}</Text>
-            <Text style={{fontWeight: 300}}>{direction.duration.text}</Text>
+            <Text style={{fontWeight: 500}}>{stop.stop_name}</Text>
+            <Text style={{fontWeight: 300}}>{stop.html_instructions}</Text>
+            <Text style={{fontWeight: 300}}>{stop.duration_text}</Text>
           </View>
         );
-    }
+    
   }
   renderCards(){
-    
     return (
       <Card containerStyle={styles.cardContainer}>
         <Text style={styles.cardTitle}>Route Summary</Text>
         <ScrollView>
-        {this.state.directions.map((direction) => 
+        {this.state.wakeUpStops.map((stop) => 
         (
-          this.configureText(direction)
+          this.configureText(stop)
         ))}
+        {this.renderTime()}
         </ScrollView>
       </Card>
     );
   }
-  renderTimeLeft(time){
+  renderTime(){
+    let time = 0;
+    this.state.wakeUpStops.map(stop =>
+      time = time + stop.duration_value
+    );
+    time = (time /60).toFixed(0);
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-        <Text style={{ fontSize: 80, fontFamily: 'arial', fontWeight: '900', color: 'white'}}>
-          {time}
-        </Text>
-        <Text style={{fontFamily: 'arial', fontSize: 12, color: 'white'}}>
-          more minutes
+      <View style={{ paddingTop: 15 }}>
+       
+        <Text style={{fontFamily: 'arial', fontSize: 18, color: '#F28585', fontWeight: '700'}}>
+        {time} minutes of nap time
         </Text>
       </View>
     );
   }
   render() {
-    console.log(this.state.directions);
+    console.log('hello');
+    console.log(this.state.wakeUpStops);
       return (
           <SafeAreaView style={styles.container}>
             {this.renderHeader()}
