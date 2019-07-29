@@ -1,4 +1,5 @@
 {
   "name": "napmap",
-  "displayName": "napmap"
+  "displayName": "napmap",
+  "sendername" : "NAPMAP"
 }
