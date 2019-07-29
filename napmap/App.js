@@ -47,7 +47,7 @@ class App extends Component {
       reset: true,
       // Geolocation Config
       desiredAccuracy: BackgroundGeolocation.DESIRED_ACCURACY_HIGH,
-      distanceFilter: 10,
+      distanceFilter: 100,
       // Activity Recognition
       stopTimeout: 1,
       // Application config
