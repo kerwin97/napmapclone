@@ -54,6 +54,8 @@ target 'napmap' do
   pod 'GooglePlaces'
   pod 'Google-Maps-iOS-Utils' # Uncomment this line if you want to support GoogleMaps on iOS
 
+  pod 'CocoaLumberjack', '~> 3.5'
+  
   target 'napmap-tvOSTests' do
     inherit! :search_paths
     # Pods for testing

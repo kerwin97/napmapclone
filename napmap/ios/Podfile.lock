@@ -1,5 +1,8 @@
 PODS:
   - boost-for-react-native (1.63.0)
+  - CocoaLumberjack (3.5.3):
+    - CocoaLumberjack/Core (= 3.5.3)
+  - CocoaLumberjack/Core (3.5.3)
   - DoubleConversion (1.1.6)
   - Firebase/Analytics (6.3.0):
     - Firebase/Core
@@ -145,6 +148,7 @@ PODS:
   - yoga (0.59.9.React)
 
 DEPENDENCIES:
+  - CocoaLumberjack (~> 3.5)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Firebase/Analytics
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
@@ -172,6 +176,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - boost-for-react-native
+    - CocoaLumberjack
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -201,6 +206,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   Firebase: 8432d732974498afd5987e9001a05f90f1a3d625
   FirebaseAnalytics: 470ddab7253b21ad5a40bebd4a9903d7ae19386a
@@ -219,6 +225,6 @@ SPEC CHECKSUMS:
   react-native-maps: d87d8ed456d4132112fb1d2ee9baf3470c0f211d
   yoga: 03ff42a6f223fb88deeaed60249020d80c3091ee
 
-PODFILE CHECKSUM: 644d0e50d131551bb5ddeb4d55cb41057bbe0faa
+PODFILE CHECKSUM: 225722ac487c58b6af554841ed8ae90dcef012f8
 
 COCOAPODS: 1.7.2
