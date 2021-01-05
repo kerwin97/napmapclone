@@ -9,7 +9,7 @@
     "postinstall": "./node_modules/react-native-maps/enable-google-maps 'ios/Pods/GoogleMaps/**'"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "firebase": "^6.2.3",
     "lodash": "^4.17.11",
     "react": "16.8.3",
